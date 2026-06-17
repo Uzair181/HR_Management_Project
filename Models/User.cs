@@ -26,5 +26,8 @@ namespace HR_Management_System.Models
         public Organization Organization { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string? Phone { get; set; }
+        public string? Address { get; set; }
+        public DateTime? DateOfBirth { get; set; }
     }
 }

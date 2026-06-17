@@ -30,6 +30,12 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<IClaimsService, ClaimsService>();
 builder.Services.AddScoped<IUserManagementService, UserManagementService>();
+builder.Services.AddScoped<IAttendanceService, AttendanceService>();
+builder.Services.AddScoped<ILeaveService, LeaveService>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IPayrollService, PayrollService>();
+builder.Services.AddScoped<IAnnouncementService, AnnouncementService>();
+builder.Services.AddScoped<IDocumentService, DocumentService>();
 
 // =======================
 // HTTP Context Accessor
@@ -71,6 +77,14 @@ builder.Services.AddAuthorization();
 // Swagger with JWT Support
 // =======================
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddHttpContextAccessor();
+
+// Increase max upload size if needed
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = 10 * 1024 * 1024; // 10MB
+});
 
 builder.Services.AddSwaggerGen(options =>
 {

@@ -1,0 +1,11 @@
+﻿namespace HR_Management_System.DTOs
+{
+    public class CreateAnnouncement
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Content { get; set; } = string.Empty;
+        public string Priority { get; set; } = "Medium";
+        public string Target { get; set; } = "All";
+        public DateTime? ExpiresAt { get; set; }
+    }
+}

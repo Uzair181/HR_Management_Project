@@ -4,6 +4,7 @@ using HR_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HR_Management_System.Migrations
 {
     [DbContext(typeof(HRDbContext))]
-    partial class HRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260617112749_AddLeaveModule")]
+    partial class AddLeaveModule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,53 +24,6 @@ namespace HR_Management_System.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("HR_Management_System.Models.Announcement", b =>
-                {
-                    b.Property<Guid>("AnnouncementId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ExpiresAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Target")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("AnnouncementId");
-
-                    b.HasIndex("CreatedByUserId");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.ToTable("Announcements");
-                });
 
             modelBuilder.Entity("HR_Management_System.Models.Attendance", b =>
                 {
@@ -134,63 +90,6 @@ namespace HR_Management_System.Migrations
                     b.HasIndex("OrganizationId");
 
                     b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("HR_Management_System.Models.Document", b =>
-                {
-                    b.Property<Guid>("DocumentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FilePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("FileSizeInBytes")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("FileType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsVisibleToEmployee")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("UploadedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DocumentId");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.HasIndex("UploadedByUserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("HR_Management_System.Models.Employee", b =>
@@ -313,126 +212,6 @@ namespace HR_Management_System.Migrations
                     b.ToTable("Organizations");
                 });
 
-            modelBuilder.Entity("HR_Management_System.Models.Payroll", b =>
-                {
-                    b.Property<Guid>("PayrollId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("AbsenceDeduction")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("AbsentDays")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ApprovedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ApprovedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("BasicSalary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("GrossSalary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("HalfDayDeduction")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("HalfDays")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("HouseAllowance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("LateDays")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("LateDeduction")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("MedicalAllowance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("NetSalary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("OtherAllowances")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("OtherDeductions")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("PaidAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PaidLeaveDays")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PaymentNote")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PresentDays")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("SalaryStructureId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TaxDeduction")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TotalDeductions")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<double>("TotalWorkingHours")
-                        .HasColumnType("float");
-
-                    b.Property<decimal>("TransportAllowance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("UnpaidLeaveDays")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("UnpaidLeaveDeduction")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("WorkingDaysInMonth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("PayrollId");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.HasIndex("SalaryStructureId");
-
-                    b.HasIndex("UserId", "Month", "Year")
-                        .IsUnique();
-
-                    b.ToTable("Payrolls");
-                });
-
             modelBuilder.Entity("HR_Management_System.Models.Role", b =>
                 {
                     b.Property<int>("RoleId")
@@ -474,70 +253,13 @@ namespace HR_Management_System.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HR_Management_System.Models.SalaryStructure", b =>
-                {
-                    b.Property<Guid>("SalaryStructureId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("BasicSalary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("HouseAllowance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("MedicalAllowance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("OtherAllowances")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("PerDayRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TaxPercentage")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TransportAllowance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("SalaryStructureId");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("SalaryStructures");
-                });
-
             modelBuilder.Entity("HR_Management_System.Models.User", b =>
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -555,9 +277,6 @@ namespace HR_Management_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
@@ -571,25 +290,6 @@ namespace HR_Management_System.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("HR_Management_System.Models.Announcement", b =>
-                {
-                    b.HasOne("HR_Management_System.Models.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HR_Management_System.Models.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("HR_Management_System.Models.Attendance", b =>
@@ -622,33 +322,6 @@ namespace HR_Management_System.Migrations
                     b.Navigation("Organization");
                 });
 
-            modelBuilder.Entity("HR_Management_System.Models.Document", b =>
-                {
-                    b.HasOne("HR_Management_System.Models.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HR_Management_System.Models.User", "UploadedBy")
-                        .WithMany()
-                        .HasForeignKey("UploadedByUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("HR_Management_System.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Organization");
-
-                    b.Navigation("UploadedBy");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("HR_Management_System.Models.Employee", b =>
                 {
                     b.HasOne("HR_Management_System.Models.Department", "Department")
@@ -677,52 +350,6 @@ namespace HR_Management_System.Migrations
                 });
 
             modelBuilder.Entity("HR_Management_System.Models.Leave", b =>
-                {
-                    b.HasOne("HR_Management_System.Models.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HR_Management_System.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Organization");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("HR_Management_System.Models.Payroll", b =>
-                {
-                    b.HasOne("HR_Management_System.Models.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HR_Management_System.Models.SalaryStructure", "SalaryStructure")
-                        .WithMany()
-                        .HasForeignKey("SalaryStructureId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HR_Management_System.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Organization");
-
-                    b.Navigation("SalaryStructure");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("HR_Management_System.Models.SalaryStructure", b =>
                 {
                     b.HasOne("HR_Management_System.Models.Organization", "Organization")
                         .WithMany()
